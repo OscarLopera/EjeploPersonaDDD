@@ -31,7 +31,4 @@ public final class PersonBuilder {
         return this;
     }
 
-    public Person build() {
-        return new Person(null, name, phone, isProfessional);
-    }
 }

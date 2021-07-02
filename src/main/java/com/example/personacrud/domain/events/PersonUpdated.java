@@ -6,14 +6,14 @@ import com.example.personacrud.domain.values.Name;
 import com.example.personacrud.domain.values.PersonId;
 import com.example.personacrud.domain.values.Phone;
 
-public class PersonUpdate extends DomainEvent {
+public class PersonUpdated extends DomainEvent {
 
     private final PersonId personId;
     private final Name name;
     private final Phone phone;
     private final IsProfessional isProfessional;
 
-    public PersonUpdate (PersonId personId, Name name, Phone phone, IsProfessional isProfessional){
+    public PersonUpdated(PersonId personId, Name name, Phone phone, IsProfessional isProfessional){
         super("person.updated");
         this.personId = personId;
         this.name = name;

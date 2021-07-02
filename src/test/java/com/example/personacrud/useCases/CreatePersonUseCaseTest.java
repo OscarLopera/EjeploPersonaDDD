@@ -4,7 +4,6 @@ import co.com.sofka.business.generic.UseCaseHandler;
 import co.com.sofka.business.support.RequestCommand;
 import com.example.personacrud.domain.Person;
 import com.example.personacrud.domain.commands.CreatePerson;
-import com.example.personacrud.domain.events.PersonCreated;
 import com.example.personacrud.domain.values.IsProfessional;
 import com.example.personacrud.domain.values.Name;
 import com.example.personacrud.domain.values.PersonId;

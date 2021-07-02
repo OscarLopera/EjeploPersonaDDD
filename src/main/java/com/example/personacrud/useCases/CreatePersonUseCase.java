@@ -4,7 +4,8 @@ import co.com.sofka.business.generic.UseCase;
 import co.com.sofka.business.support.RequestCommand;
 import com.example.personacrud.domain.Person;
 import com.example.personacrud.domain.commands.CreatePerson;
-import com.example.personacrud.repository.IPersonRepository;
+import com.example.personacrud.repository.IPersonDataRepository;
+import com.example.personacrud.repository.PersonData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,15 +13,20 @@ import org.springframework.stereotype.Service;
 public class CreatePersonUseCase extends UseCase<RequestCommand<CreatePerson>, CreatePersonUseCase.Response> {
 
     @Autowired
-    private IPersonRepository iPersonRepository;
+    private IPersonDataRepository data;
 
     @Override
     public void executeUseCase(RequestCommand<CreatePerson> createPersonRequestCommand) {
         var command = createPersonRequestCommand.getCommand();
         var person = new Person(command.personId(),command.name(), command.phone(), command.isProfessional());
-        iPersonRepository.save(person);
+        data.save(transform(person));
         emit().onResponse(new Response(person));
 
+    }
+
+    public PersonData transform(Person person) {
+        PersonData personData = new PersonData(person.getIdJhon(), person.getName().value(),person.getPhone().value(), person.getIsProfessional().value());
+        return personData ;
     }
 
     public static class Response implements UseCase.ResponseValues{
