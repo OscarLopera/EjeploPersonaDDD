@@ -2,7 +2,9 @@ package com.example.personacrud.useCases;
 
 import co.com.sofka.business.generic.UseCase;
 import co.com.sofka.business.support.RequestCommand;
+import co.com.sofka.domain.generic.Command;
 import com.example.personacrud.domain.Person;
+import com.example.personacrud.domain.commands.CreatePerson;
 import com.example.personacrud.domain.commands.UpdatePerson;
 import com.example.personacrud.repository.IPersonDataRepository;
 import com.example.personacrud.repository.PersonData;
@@ -19,8 +21,8 @@ public class UpdatePersonUseCase extends UseCase<RequestCommand<UpdatePerson>, c
     public void executeUseCase(RequestCommand<UpdatePerson> updatePersonRequestCommand) {
 
 
-        var command = updatePersonRequestCommand.getCommand();
-        var person = new Person(command.personId(),command.name(), command.phone(), command.isProfessional());
+        UpdatePerson command = updatePersonRequestCommand.getCommand();
+        Person person = new Person(command.personId(),command.name(), command.phone(), command.isProfessional());
         data.save(transform(person));
         emit().onResponse(new Response(person));
 
