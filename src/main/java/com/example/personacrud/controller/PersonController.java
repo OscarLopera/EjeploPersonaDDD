@@ -36,7 +36,7 @@ public class PersonController {
                        @PathVariable("name")String name,
                        @PathVariable("phone")String phone,
                        @PathVariable("professional")Boolean professional){
-        var command = new CreatePerson(PersonId.of(id), new Name(name), new Phone(phone), new IsProfessional(professional));
+        CreatePerson command = new CreatePerson(PersonId.of(id), new Name(name), new Phone(phone), new IsProfessional(professional));
         CreatePersonUseCase.Response personCreated = executedUseCase(command);
 
         String string = "{"
@@ -51,10 +51,10 @@ public class PersonController {
     }
 
     private CreatePersonUseCase.Response executedUseCase(CreatePerson command) {
-        var events = UseCaseHandler.getInstance()
+        CreatePersonUseCase.Response events = UseCaseHandler.getInstance()
                 .syncExecutor(createPersonUseCase, new RequestCommand<>(command))
                 .orElseThrow();
-        var PersonCreated = events;
+        CreatePersonUseCase.Response PersonCreated = events;
         return PersonCreated;
     }
 
@@ -63,7 +63,7 @@ public class PersonController {
                        @PathVariable("name")String name,
                        @PathVariable("phone")String phone,
                        @PathVariable("professional")Boolean professional){
-        var command = new UpdatePerson(PersonId.of(id), new Name(name), new Phone(phone), new IsProfessional(professional));
+        UpdatePerson command = new UpdatePerson(PersonId.of(id), new Name(name), new Phone(phone), new IsProfessional(professional));
         UpdatePersonUseCase.Response personUpdated = executedUseCase(command);
 
         String string = "{"
@@ -78,11 +78,11 @@ public class PersonController {
     }
 
     private UpdatePersonUseCase.Response executedUseCase(UpdatePerson command) {
-        var events = UseCaseHandler.getInstance()
+        UpdatePersonUseCase.Response events = UseCaseHandler.getInstance()
                 .syncExecutor(updatePersonUseCase, new RequestCommand<>(command))
                 .orElseThrow();
-        var PersonUpdated = events;
-        return (UpdatePersonUseCase.Response) PersonUpdated;
+        UpdatePersonUseCase.Response personUpdated = events;
+        return personUpdated;
     }
 
     @GetMapping(value = "api/findPersons")
